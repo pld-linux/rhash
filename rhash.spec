@@ -1,12 +1,12 @@
 Summary:	RHash - Recursive Hasher
 Summary(pl.UTF-8):	RHash - rekursywne obliczanie funkcji skrótu
 Name:		rhash
-Version:	1.3.3
+Version:	1.3.4
 Release:	1
 License:	MIT
 Group:		Applications/File
 Source0:	http://downloads.sourceforge.net/rhash/%{name}-%{version}-src.tar.gz
-# Source0-md5:	0e3c758b5e4b25e29e0094a33a9d2764
+# Source0-md5:	0b51010604659e9e99f6307b053ba13b
 URL:		http://rhash.anz.ru/
 BuildRequires:	openssl-devel
 BuildRequires:	sed >= 4.0
@@ -106,7 +106,12 @@ rm -rf $RPM_BUILD_ROOT
 	MANDIR=%{_mandir} \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__chmod} 755 $RPM_BUILD_ROOT/%{_libdir}/librhash.so*
+# missing from top-level Makefile
+%{__make} -C librhash install-so-link \
+	LIBDIR=%{_libdir} \
+	DESTDIR=$RPM_BUILD_ROOT
+
+%{__chmod} 755 $RPM_BUILD_ROOT%{_libdir}/librhash.so*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -127,8 +132,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/tth-hash
 %attr(755,root,root) %{_bindir}/whirlpool-hash
 
-%{_sysconfdir}/%{name}rc
-%{_mandir}/man1/*
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/rhashrc
+%{_mandir}/man1/ed2k-link.1*
+%{_mandir}/man1/gost-hash.1*
+%{_mandir}/man1/has160-hash.1*
+%{_mandir}/man1/magnet-link.1*
+%{_mandir}/man1/rhash.1*
+%{_mandir}/man1/sfv-hash.1*
+%{_mandir}/man1/tiger-hash.1*
+%{_mandir}/man1/tth-hash.1*
+%{_mandir}/man1/whirlpool-hash.1*
 
 %files libs
 %defattr(644,root,root,755)
