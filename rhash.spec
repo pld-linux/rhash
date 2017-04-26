@@ -30,13 +30,12 @@ Features:
 * Calculates several hash sums in one pass. 
 
 %description -l pl.UTF-8
-RHash jest konsolowym narzędziem służącym do obliczania
-różnych funkcji skrótu dla plików. Obsługiwane algorytmy to:
-CRC32, MD4, MD5, SHA1, SHA256, SHA512, Tiger, DC++ TTH, BitTorrent
-BTIH, ED2K, AICH, GOST R 34.11-94, RIPEMD-160, HAS-160, EDON-R
-256/512, Whirlpool i Snefru-128/256. Funkcje skrótu są
-wykorzystywane do zapewnienia spójności danych przy
-długotrwałym składowaniu oraz transmisji.
+RHash jest konsolowym narzędziem służącym do obliczania różnych
+funkcji skrótu dla plików. Obsługiwane algorytmy to: CRC32, MD4, MD5,
+SHA1, SHA256, SHA512, Tiger, DC++ TTH, BitTorrent BTIH, ED2K, AICH,
+GOST R 34.11-94, RIPEMD-160, HAS-160, EDON-R 256/512, Whirlpool i
+Snefru-128/256. Funkcje skrótu są wykorzystywane do zapewnienia
+spójności danych przy długotrwałym składowaniu oraz transmisji.
 
 Własności:
 * Potrafi tworzyć linki typu magnet.
@@ -48,7 +47,7 @@ Własności:
 * Obliczanie wielu funkcji skrótu w jednym przebiegu.
 
 %package libs
-Summary:	RHash - library
+Summary:	RHash (Recursive Hasher) library
 Summary(pl.UTF-8):	RHash - biblioteka funkcji skrótu
 Group:		Libraries
 
