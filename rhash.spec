@@ -2,7 +2,7 @@ Summary:	RHash - Recursive Hasher
 Summary(pl.UTF-8):	RHash - rekursywne obliczanie funkcji skrótu
 Name:		rhash
 Version:	1.3.5
-Release:	1
+Release:	2
 License:	MIT
 Group:		Applications/File
 Source0:	http://downloads.sourceforge.net/rhash/%{name}-%{version}-src.tar.gz
