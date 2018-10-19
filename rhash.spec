@@ -88,6 +88,7 @@ RHash - statyczna wersja biblioteki funkcji skrótu.
 # not ac-based configure
 ./configure \
 	--cc="%{__cc}" \
+	--ar="%{__ar}" \
 	--extra-cflags="%{rpmcflags}" \
 	--extra-ldflags="%{rpmldflags}" \
 	--prefix="%{_prefix}" \
