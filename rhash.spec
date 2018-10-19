@@ -15,19 +15,19 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 RHash (Recursive Hasher) is a console utility for computing and
 verifying hash sums of files. It supports CRC32, MD4, MD5, SHA1,
-SHA256, SHA512, Tiger, DC++ TTH, BitTorrent BTIH, ED2K, AICH, GOST
-R 34.11-94, RIPEMD-160, HAS-160, EDON-R 256/512, Whirlpool and
+SHA256, SHA512, Tiger, DC++ TTH, BitTorrent BTIH, ED2K, AICH, GOST R
+34.11-94, RIPEMD-160, HAS-160, EDON-R 256/512, Whirlpool and
 Snefru-128/256 algorithms. Hash sums are used to ensure and verify
 integrity of large volumes of data for a long-term storing or
-transferring. 
+transferring.
 
 Features:
-* Can calculate Magnet links.
-* Output in a predefined (SFV, BSD-like) or user defined format.
-* Ability to process directories recursively.
-* Updating of existing hash files (adding sums of files missing in the
+- Can calculate Magnet links.
+- Output in a predefined (SFV, BSD-like) or user defined format.
+- Ability to process directories recursively.
+- Updating of existing hash files (adding sums of files missing in the
   hash file).
-* Calculates several hash sums in one pass. 
+- Calculates several hash sums in one pass.
 
 %description -l pl.UTF-8
 RHash jest konsolowym narzędziem służącym do obliczania różnych
@@ -38,13 +38,13 @@ Snefru-128/256. Funkcje skrótu są wykorzystywane do zapewnienia
 spójności danych przy długotrwałym składowaniu oraz transmisji.
 
 Własności:
-* Potrafi tworzyć linki typu magnet.
-* Wynik w postaci predefiniowanej (SFV, BSD) lub zdefiniowanej przez
+- Potrafi tworzyć linki typu magnet.
+- Wynik w postaci predefiniowanej (SFV, BSD) lub zdefiniowanej przez
   użytkownika.
-* Rekursywne przetwarzanie katalogów.
-* Aktualizowanie istniejących plików ze skrótami (dodaje skróty
-  plików brakujących w pliku ze skrótami).
-* Obliczanie wielu funkcji skrótu w jednym przebiegu.
+- Rekursywne przetwarzanie katalogów.
+- Aktualizowanie istniejących plików ze skrótami (dodaje skróty plików
+  brakujących w pliku ze skrótami).
+- Obliczanie wielu funkcji skrótu w jednym przebiegu.
 
 %package libs
 Summary:	RHash (Recursive Hasher) library
@@ -124,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING ChangeLog README 
+%doc COPYING ChangeLog README
 %attr(755,root,root) %{_bindir}/rhash
 %attr(755,root,root) %{_bindir}/ed2k-link
 %attr(755,root,root) %{_bindir}/edonr256-hash
