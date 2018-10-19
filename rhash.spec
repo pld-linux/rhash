@@ -1,12 +1,12 @@
 Summary:	RHash - Recursive Hasher
 Summary(pl.UTF-8):	RHash - rekursywne obliczanie funkcji skrótu
 Name:		rhash
-Version:	1.3.5
-Release:	2
+Version:	1.3.6
+Release:	1
 License:	MIT
 Group:		Applications/File
 Source0:	http://downloads.sourceforge.net/rhash/%{name}-%{version}-src.tar.gz
-# Source0-md5:	f586644019c10c83c6b6835de4b99e74
+# Source0-md5:	9af110ade09b4a4b1b3bdf88dcae3713
 URL:		http://rhash.anz.ru/
 BuildRequires:	openssl-devel
 BuildRequires:	sed >= 4.0
@@ -85,29 +85,33 @@ RHash - statyczna wersja biblioteki funkcji skrótu.
 %setup -q -n RHash-%{version}
 
 %build
-%{__make} \
-	build-shared \
-	lib-static \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -DUSE_GETTEXT -DUSE_OPENSSL" \
-	LDFLAGS="%{rpmldflags} -lcrypto"
+# not ac-based configure
+./configure \
+	--cc="%{__cc}" \
+	--extra-cflags="%{rpmcflags}" \
+	--extra-ldflags="%{rpmldflags}" \
+	--prefix="%{_prefix}" \
+	--bindir="%{_bindir}" \
+	--sysconfdir="%{_sysconfdir}" \
+	--mandir="%{_mandir}" \
+	--libdir="%{_libdir}" \
+	--pkgconfigdir="%{_pkgconfigdir}" \
+	--enable-gettext \
+	--enable-openssl \
+	--enable-openssl-runtime \
+	--enable-lib-shared \
+	--enable-lib-static
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
-%{__make} \
-	install-shared \
-	install-lib-static \
-	install-lib-shared \
-	PREFIX=%{_prefix} \
-	LIBDIR=%{_libdir} \
-	INCDIR=%{_includedir} \
-	MANDIR=%{_mandir} \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # missing from top-level Makefile
 %{__make} -C librhash install-so-link \
-	LIBDIR=%{_libdir} \
+	LIBDIR=$RPM_BUILD_ROOT%{_libdir} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__chmod} 755 $RPM_BUILD_ROOT%{_libdir}/librhash.so*
@@ -123,6 +127,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING ChangeLog README 
 %attr(755,root,root) %{_bindir}/rhash
 %attr(755,root,root) %{_bindir}/ed2k-link
+%attr(755,root,root) %{_bindir}/edonr256-hash
+%attr(755,root,root) %{_bindir}/edonr512-hash
 %attr(755,root,root) %{_bindir}/gost-hash
 %attr(755,root,root) %{_bindir}/has160-hash
 %attr(755,root,root) %{_bindir}/magnet-link
@@ -133,6 +139,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/rhashrc
 %{_mandir}/man1/ed2k-link.1*
+%{_mandir}/man1/edonr256-hash.1*
+%{_mandir}/man1/edonr512-hash.1*
 %{_mandir}/man1/gost-hash.1*
 %{_mandir}/man1/has160-hash.1*
 %{_mandir}/man1/magnet-link.1*
