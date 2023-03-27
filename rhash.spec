@@ -1,13 +1,13 @@
 Summary:	RHash - Recursive Hasher
 Summary(pl.UTF-8):	RHash - rekursywne obliczanie funkcji skrótu
 Name:		rhash
-Version:	1.3.6
+Version:	1.4.3
 Release:	1
-License:	MIT
+License:	BSD Zero Clause
 Group:		Applications/File
-Source0:	http://downloads.sourceforge.net/rhash/%{name}-%{version}-src.tar.gz
-# Source0-md5:	9af110ade09b4a4b1b3bdf88dcae3713
-URL:		http://rhash.anz.ru/
+Source0:	https://downloads.sourceforge.net/rhash/%{name}-%{version}-src.tar.gz
+# Source0-md5:	6de2d29618321e98cbb6138813b99797
+URL:		https://rhash.sourceforge.net/
 BuildRequires:	openssl-devel
 BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -84,6 +84,9 @@ RHash - statyczna wersja biblioteki funkcji skrótu.
 %prep
 %setup -q -n RHash-%{version}
 
+# missing update in 1.4.3
+%{__sed} -i -e 's/1\.4\.2/%{version}/' version.h
+
 %build
 # not ac-based configure
 ./configure \
@@ -107,7 +110,8 @@ RHash - statyczna wersja biblioteki funkcji skrótu.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install \
+
+%{__make} install install-pkg-config \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # missing from top-level Makefile
@@ -125,12 +129,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING ChangeLog README
 %attr(755,root,root) %{_bindir}/rhash
 %attr(755,root,root) %{_bindir}/ed2k-link
 %attr(755,root,root) %{_bindir}/edonr256-hash
 %attr(755,root,root) %{_bindir}/edonr512-hash
-%attr(755,root,root) %{_bindir}/gost-hash
+%attr(755,root,root) %{_bindir}/gost12-256-hash
+%attr(755,root,root) %{_bindir}/gost12-512-hash
 %attr(755,root,root) %{_bindir}/has160-hash
 %attr(755,root,root) %{_bindir}/magnet-link
 %attr(755,root,root) %{_bindir}/sfv-hash
@@ -142,7 +146,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/ed2k-link.1*
 %{_mandir}/man1/edonr256-hash.1*
 %{_mandir}/man1/edonr512-hash.1*
-%{_mandir}/man1/gost-hash.1*
+%{_mandir}/man1/gost12-256-hash.1*
+%{_mandir}/man1/gost12-512-hash.1*
 %{_mandir}/man1/has160-hash.1*
 %{_mandir}/man1/magnet-link.1*
 %{_mandir}/man1/rhash.1*
@@ -153,6 +158,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
+%doc COPYING ChangeLog README.md
 %attr(755,root,root) %{_libdir}/librhash.so.0
 
 %files devel
@@ -160,6 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/librhash.so
 %{_includedir}/rhash.h
 %{_includedir}/rhash_torrent.h
+%{_pkgconfigdir}/librhash.pc
 
 %files static
 %defattr(644,root,root,755)
