@@ -111,7 +111,7 @@ RHash - statyczna wersja biblioteki funkcji skrótu.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install install-pkg-config \
+%{__make} -j1 install install-pkg-config \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # missing from top-level Makefile
