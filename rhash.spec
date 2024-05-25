@@ -1,12 +1,12 @@
 Summary:	RHash - Recursive Hasher
 Summary(pl.UTF-8):	RHash - rekursywne obliczanie funkcji skrótu
 Name:		rhash
-Version:	1.4.3
+Version:	1.4.4
 Release:	1
 License:	BSD Zero Clause
 Group:		Applications/File
 Source0:	https://downloads.sourceforge.net/rhash/%{name}-%{version}-src.tar.gz
-# Source0-md5:	6de2d29618321e98cbb6138813b99797
+# Source0-md5:	85384cefd616b6371cc95b9d89ffca28
 URL:		https://rhash.sourceforge.net/
 BuildRequires:	openssl-devel
 BuildRequires:	sed >= 4.0
@@ -159,7 +159,8 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %doc COPYING ChangeLog README.md
-%attr(755,root,root) %{_libdir}/librhash.so.0
+%attr(755,root,root) %{_libdir}/librhash.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librhash.so.1
 
 %files devel
 %defattr(644,root,root,755)
